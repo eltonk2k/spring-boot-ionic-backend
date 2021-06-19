@@ -12,9 +12,10 @@ import com.br.projeto.springbootmc.domain.Cliente;
 public class ClienteDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
-//	@NotEmpty(message="Preenchimento Obrigatório")
-//	@Length(min=5, max=120, message="O tamanho deve ser entre 5 e 120 caracteres")
 	private Integer id;
+	
+	@NotEmpty(message="Preenchimento Obrigatório")
+	@Length(min=5, max=120, message="O tamanho deve ser entre 5 e 120 caracteres")
 	private String nome;
 	
 	@NotEmpty(message="Preenchimento Obrigatório")
