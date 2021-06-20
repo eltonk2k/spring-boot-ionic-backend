@@ -69,11 +69,11 @@ public class Pedido implements Serializable {
 		this.id = id;
 	}
 
-	public Date getData() {
+	public Date getInstante() {
 		return instante;
 	}
 
-	public void setData(Date instante) {
+	public void setInstante(Date instante) {
 		this.instante = instante;
 	}
 
