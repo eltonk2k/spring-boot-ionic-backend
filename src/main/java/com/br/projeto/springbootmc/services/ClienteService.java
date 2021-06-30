@@ -15,11 +15,14 @@ import org.springframework.transaction.annotation.Transactional;
 import com.br.projeto.springbootmc.domain.Cidade;
 import com.br.projeto.springbootmc.domain.Cliente;
 import com.br.projeto.springbootmc.domain.Endereco;
+import com.br.projeto.springbootmc.domain.enums.Perfil;
 import com.br.projeto.springbootmc.domain.enums.TipoCliente;
 import com.br.projeto.springbootmc.dto.ClienteDTO;
 import com.br.projeto.springbootmc.dto.ClienteNewDTO;
 import com.br.projeto.springbootmc.repositories.ClienteRepository;
 import com.br.projeto.springbootmc.repositories.EnderecoRepository;
+import com.br.projeto.springbootmc.security.UserSS;
+import com.br.projeto.springbootmc.services.exceptions.AuthorizationException;
 import com.br.projeto.springbootmc.services.exceptions.DataIntegrityException;
 import com.br.projeto.springbootmc.services.exceptions.ObjectNotFoundException;
 
@@ -37,6 +40,12 @@ public class ClienteService {
 	
 	
 	public Cliente find(Integer id) {
+		UserSS user = UserService.authenticated();
+		if (user == null || !user.hasRole(Perfil.ADMIN) && !id.equals(user.getId())) {
+			throw new AuthorizationException("Acesso negado");
+		}
+		
+		
 		Optional<Cliente> obj = repo.findById(id);
 		return obj.orElseThrow(() -> new ObjectNotFoundException(
 				"Objeto não encontrado! Id: " + id + ", Tipo: " + Cliente.class.getName()));
