@@ -74,7 +74,7 @@ O `Authorization` é do formato JWT e contém informações da empresa (subdomí
 
 Buscar detalhes da conta.
 
-### Listar (List) [GET /clientes]
+### Clientes (List) [GET /clientes]
 
 + Request (application/json)
 
@@ -275,6 +275,38 @@ Os pedidos podem ser clientes, categoria, produtos, estados.
               "error": "Não encontrado",
               "message": "Objeto não encontrado! Id: 4, Tipo: com.br.projeto.springbootmc.domain.Pedido",
               "path": "/pedidos/4"
+          }
+
+
+### Estados (List) [GET /estados]
+
++ Request (application/json)
+
+    + Headers
+
+            Content-Type:  [application/json]
+            Authorization: Bearer [access_token]
+
+
++ Response 200 (application/json)
+
+               {
+               "id": 1,
+                 "nome": "Minas Gerais"
+                },
+                {
+                "id": 2,
+                "nome": "São Paulo"
+            }
+            
++ Response 403 (application/json)
+
+          {
+             "timestamp": 1670373501454,
+             "status": 404,
+             "error": "Not Found",
+             "message": "No message available",
+             "path": "/estados/1"
           }
 
 ### Novo Clientes (Create) [POST]
