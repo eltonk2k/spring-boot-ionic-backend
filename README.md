@@ -74,7 +74,7 @@ O `Authorization` é do formato JWT e contém informações da empresa (subdomí
 
 Buscar detalhes da conta.
 
-### Listar (List) [GET /Clientes]
+### Listar (List) [GET /clientes]
 
 + Request (application/json)
 
@@ -85,55 +85,64 @@ Buscar detalhes da conta.
 
 + Response 200 (application/json)
 
-          {
-    "id": 1,
-    "nome": "Maria Silva",
-    "email": "pbexecutores2@gmail.com",
-    "cpfOuCnpj": "36378912377",
-    "tipo": "PESSOAFISICA",
-    "enderecos": [
-        {
-            "id": 1,
-            "logradouro": "Rua Flores",
-            "numero": "300",
-            "complemento": "Apto 303",
-            "bairro": "Jardim",
-            "cep": "38220834",
-            "cidade": {
+               {
+                "id": 1,
+                "nome": "Maria Silva",
+                "email": "pbexecutores2@gmail.com",
+                "cpfOuCnpj": "36378912377",
+                "tipo": "PESSOAFISICA",
+                "enderecos": [
+                {
+                "id": 1,
+                "logradouro": "Rua Flores",
+                "numero": "300",
+                "complemento": "Apto 303",
+                "bairro": "Jardim",
+                "cep": "38220834",
+                "cidade": {
                 "id": 1,
                 "nome": "Uberlândia",
                 "estado": {
-                    "id": 1,
-                    "nome": "Minas Gerais"
+                "id": 1,
+                "nome": "Minas Gerais"
                 }
-            }
-        },
-        {
-            "id": 2,
-            "logradouro": "Avenida Matos",
-            "numero": "105",
-            "complemento": "Sala 800",
-            "bairro": "Centro",
-            "cep": "38777012",
-            "cidade": {
+                }
+                },
+                {
+                "id": 2,
+                "logradouro": "Avenida Matos",
+                "numero": "105",
+                "complemento": "Sala 800",
+                "bairro": "Centro",
+                 "cep": "38777012",
+                "cidade": {
                 "id": 2,
                 "nome": "São Paulo",
                 "estado": {
-                    "id": 2,
-                    "nome": "São Paulo"
+                "id": 2,
+                "nome": "São Paulo"
                 }
+                }
+                }
+                ],
+                "telefones": [
+                "27363323",
+                "93838393"
+                 ],
+                "perfis": [
+                "CLIENTE"
+                ]
             }
-        }
-    ],
-    "telefones": [
-        "27363323",
-        "93838393"
-    ],
-    "perfis": [
-        "CLIENTE"
-    ]
-}
+            
++ Response 403 (application/json)
 
+          {
+             "timestamp": 1670372229955,
+             "status": 403,
+             "error": "Acesso negado",
+             "message": "Acesso negado",
+             "path": "/clientes/4"
+          }
 
 
 # Pedidos [/pedidos]
@@ -146,26 +155,7 @@ Os pedidos podem ser clientes, categoria, produtos, estados.
     + endereco (string, optional) - Busca a string informada no endereço do contato (rua, cep, bairro, cidade e estado)
     + telefone (string, optional) - Busca o valor informado no campo "Telefones" do contato
     + email (string, optional) - Busca o valor informado no campo "E-mails" do contato
-    + clienteFinal (number, optional) - Filtrar por cliente final. Valores possíveis:
-        * 1 - Sim
-        * 2 - Não
-    + indIE (number, optional) - Filtrar por indicador de IE. Valores possíveis:
-        * 1 - Contribuinte
-        * 2 - Isento de IE
-        * 9 - Não contribuinte
-    + IE (string, optional) - Filtra por inscrição estadual 
-    + IM (string, optional) - Filtra por inscrição municipal
-    + suframa (string, optional) - Filtra pelo código SUFRAMA 
-    + obs (string, optional) - Busca a string informada nas observações do contato
-    + fields (string, optional) - Permite definir quais os campos serão retornados pela api. Informe separado por vírgula. Valores possíveis:
-        * codigo, nome, fantasia, nomeParaContato, cpfcnpj, tipo, dtNasc, dtCad, emails, fones, logradouro, numero, complemento, bairro, cep, cidade, uf, clienteFinal, indicadorIE, inscricaoMunicipal, inscricaoEstadual, obs, tags
-        * ex: &fields=nome,fantasia
-        * Padrão: codigo, nome, tipo, emails, fones, cidade, uf, clienteFinal, tags
-    + orderBy (string, optional) - Permite definir a ordenação da listagem. Informe o campo e a forma de ordenação (ascendente ou descendente) separados por vírgula. Só é possível definir uma ordenação por requisição. Valores possíveis:
-        * codigo, tipo, nome, fantasia, nomeParaContato, cpfcnpj, clienteFinal, indicadorIE, inscricaoEstadual, inscricaoMunicipal, suframa, emails, cidade
-        * ex: &orderBy=nome,desc
-        * ex: &orderBy=fantasia,asc
-        
+
 
 + Request (application/json)
 
@@ -175,209 +165,143 @@ Os pedidos podem ser clientes, categoria, produtos, estados.
             Authorization: Bearer [access_token]
 
 + Response 200 (application/json)
-
-          {
-    "id": 1,
-    "instante": "30/09/2017 13:32",
-    "pagamento": {
-        "@type": "pagamentoComCartao",
-        "id": 1,
-        "estado": "QUITADO",
-        "numeroDeParcelas": 6
-    },
-    "cliente": {
-        "id": 1,
-        "nome": "Maria Silva",
-        "email": "pbexecutores2@gmail.com",
-        "cpfOuCnpj": "36378912377",
-        "tipo": "PESSOAFISICA",
-        "enderecos": [
+ 
             {
-                "id": 1,
-                "logradouro": "Rua Flores",
-                "numero": "300",
-                "complemento": "Apto 303",
-                "bairro": "Jardim",
-                "cep": "38220834",
-                "cidade": {
+                    "id": 1,
+                    "instante": "30/09/2017 13:32",
+                    "pagamento": {
+                    "@type": "pagamentoComCartao",
+                    "id": 1,
+                    "estado": "QUITADO",
+                    "numeroDeParcelas": 6
+                    },
+                    "cliente": {
+                    "id": 1,
+                    "nome": "Maria Silva",
+                    "email": "pbexecutores2@gmail.com",
+                    "cpfOuCnpj": "36378912377",
+                    "tipo": "PESSOAFISICA",
+                    "enderecos": [
+                    {
+                    "id": 1,
+                    "logradouro": "Rua Flores",
+                    "numero": "300",
+                    "complemento": "Apto 303",
+                    "bairro": "Jardim",
+                    "cep": "38220834",
+                    "cidade": {
                     "id": 1,
                     "nome": "Uberlândia",
                     "estado": {
-                        "id": 1,
-                        "nome": "Minas Gerais"
+                    "id": 1,
+                    "nome": "Minas Gerais"
                     }
-                }
-            },
-            {
-                "id": 2,
-                "logradouro": "Avenida Matos",
-                "numero": "105",
-                "complemento": "Sala 800",
-                "bairro": "Centro",
-                "cep": "38777012",
-                "cidade": {
+                    }
+                    },
+                    {
+                    "id": 2,
+                    "logradouro": "Avenida Matos",
+                    "numero": "105",
+                    "complemento": "Sala 800",
+                    "bairro": "Centro",
+                    "cep": "38777012",
+                    "cidade": {
                     "id": 2,
                     "nome": "São Paulo",
                     "estado": {
-                        "id": 2,
-                        "nome": "São Paulo"
+                    "id": 2,
+                    "nome": "São Paulo"
                     }
-                }
+                    }
+                    }
+                    ],
+                    "telefones": [
+                    "27363323",
+                    "93838393"
+                    ],
+                    "perfis": [
+                    "CLIENTE"
+                    ]
+                    },
+                    "enderecoDeEntrega": {
+                    "id": 1,
+                    "logradouro": "Rua Flores",
+                    "numero": "300",
+                    "complemento": "Apto 303",
+                    "bairro": "Jardim",
+                    "cep": "38220834",
+                    "cidade": {
+                    "id": 1,
+                    "nome": "Uberlândia",
+                    "estado": {
+                    "id": 1,
+                    "nome": "Minas Gerais"
+                    }
+                    }
+                    },
+                    "itens": [
+                    {
+                    "desconto": 0.0,
+                    "quantidade": 1,
+                    "preco": 2000.0,
+                    "subTotal": 2000.0,
+                    "produto": {
+                    "id": 1,
+                    "nome": "Computador",
+                    "preco": 2000.0
+                    }
+                    },
+                    {
+                    "desconto": 0.0,
+                    "quantidade": 2,
+                    "preco": 80.0,
+                    "subTotal": 160.0,
+                    "produto": {
+                    "id": 3,
+                    "nome": "Mouse",
+                    "preco": 80.0
+                    }
+                    }
+                    ],
+                    "valorTotal": 2160.0
             }
-        ],
-        "telefones": [
-            "27363323",
-            "93838393"
-        ],
-        "perfis": [
-            "CLIENTE"
-        ]
-    },
-    "enderecoDeEntrega": {
-        "id": 1,
-        "logradouro": "Rua Flores",
-        "numero": "300",
-        "complemento": "Apto 303",
-        "bairro": "Jardim",
-        "cep": "38220834",
-        "cidade": {
-            "id": 1,
-            "nome": "Uberlândia",
-            "estado": {
-                "id": 1,
-                "nome": "Minas Gerais"
-            }
-        }
-    },
-    "itens": [
-        {
-            "desconto": 0.0,
-            "quantidade": 1,
-            "preco": 2000.0,
-            "subTotal": 2000.0,
-            "produto": {
-                "id": 1,
-                "nome": "Computador",
-                "preco": 2000.0
-            }
-        },
-        {
-            "desconto": 0.0,
-            "quantidade": 2,
-            "preco": 80.0,
-            "subTotal": 160.0,
-            "produto": {
-                "id": 3,
-                "nome": "Mouse",
-                "preco": 80.0
-            }
-        }
-    ],
-    "valorTotal": 2160.0
-}
+              
 
-+ Response 401 (application/json)
++ Response 403 (application/json)
 
           {
-              "errCode": 401,
-              "errMsg": "Não foi possível acessar o sistema. Verifique seu \"access_token\".",
-              "errObs": "access_denied",
-              "errFields": null,
-              "errUrl": "/v1/contatos"
+             "timestamp": 1670372185204,
+              "status": 404,
+              "error": "Não encontrado",
+              "message": "Objeto não encontrado! Id: 4, Tipo: com.br.projeto.springbootmc.domain.Pedido",
+              "path": "/pedidos/4"
           }
 
-### Novo (Create) [POST]
+### Novo Clientes (Create) [POST]
 
-+ Attributes (object)
 
-    + nome: nome do contato (string, required) - limite 60 caracteres
-    + fantasia (string, optional) - limite de 60 caracteres
-    + tipo (array, required) - Tipo
-        + cliente
-        + fornecedor
-        + transportadora
-    + nomeParaContato (string, optional) - limite de 60 caracteres
-    + cpfcnpj (string, optional)
-    + dtNasc (string, optional) - formato: YYYY-MM-DD
-    + emails (array)
-    + fones (array)
-    + cep (number, optional)
-    + logradouro (string, optional)
-    + numero (string, optional)
-    + complemento (string, optional)
-    + bairro (string, optional)
-    + cidade (string, optional)
-    + codIBGE (string, optional) - Informe um código IBGE válido
-    + uf (string, optional) - O UF deverá ser referente ao código do IBGE informado
-    + pais (string, optional)
-    + clienteFinal (optional)
-    + indicadorIE (enum[number], optional)
-        + Members
-          + 1 - Contribuinte
-          + 2 - Isento de IE
-          + 9 - Não contribuinte
-    + inscricaoMunicipal (string, optional)
-    + inscricaoEstadual (string, optional)
-    + inscricaoEstadualST (string, optional)
-    + suframa (string, optional)
-    + obs (string, optional)
-    + tags (array, optional)
-    + cepEntrega (number, optional) - CEP do endereço de entrega, caso seja diferente do informado no cliente
-    + cpfCnpjEntrega (number, optional) - CPF/CNPJ do endereço de entrega, caso seja diferente do informado no cliente
-    + logradouroEntrega (string, optional) - Logradouro do endereço de entrega, caso seja diferente do informado no cliente
-    + numeroEntrega (number, optional) - Número do endereço de entrega, caso seja diferente do informado no cliente
-    + complementoEntrega (string, optional) - Complemento do endereço de entrega, caso seja diferente do informado no cliente
-    + bairroEntrega (string, optional) - Bairro do endereço de entrega, caso seja diferente do informado no cliente
-    + codIBGEEntrega (number, optional) - Código da cidade do endereço de entrega, caso seja diferente do informado no cliente
-    + ufEntrega (string, optional) - UF do endereço de entrega, caso seja diferente do informado no cliente. O UF deverá ser referente ao código do IBGE informado
-    + pontoRefEntrega (string, optional) - Ponto de referência do endereço de entrega, caso seja diferente do informado no cliente 
-
+   
 + Request (application/json)
 
     + Headers
 
+            Content-Type:  [application/json]
             Authorization: Bearer [access_token]
 
     + Body
 
             {
-              "nome": "Kaya Labadie",
-              "fantasia": "",
-              "nomeParaContato": "Elfrieda Labadie",
-              "cpfcnpj": "00000000000191",
-              "tipo": [
-                "cliente"
-              ],
-              "dtNasc": "1992-02-13",
-              "emails": [
-                "exemplo@example.com.br"
-              ],
-              "fones": [],
-              "cep": ,
-              "logradouro": "Rua Exemplo lado ímpar",
-              "numero": "999",
-              "complemento": "",
-              "bairro": "",
-              "codIBGE": "3550308",
-              "uf": "SP",
-              "pais": "",
-              "clienteFinal": true,
-              "indicadorIE": 1,
-              "inscricaoMunicipal": "",
-              "inscricaoEstadual": "",
-              "inscricaoEstadualST": "",
-              "cpfCnpjEntrega": "25214589514",
-              "logradouroEntrega": "Rua das palmeiras",
-              "numeroEntrega": "123",
-              "complementoEntrega": "AP 300",
-              "bairroEntrega": "Centro",
-              "codIBGEEntrega": "4304606",
-              "ufEntrega": "RS",
-              "cepEntrega": "92120555",
-              "pontoRefEntrega": "Prédio branco"
-              "suframa": "",
-              "obs": "",
-              "tags": ["cliente bom", "especial"]
+                "nome" : "João da Silva",
+                "email" : "joao@gmail.com",
+                "cpfOuCnpj" : "39044683756",
+                "tipo" : 1,
+                "telefone1" : "997723874",
+                "telefone2" : "32547698",
+                "logradouro" : "Rua das Acácias",
+                "numero" : "345",
+                "complemento" : "Apto 302",
+                "cep" : "38746928",
+                "cidadeId" : 2
             }
 
 + Response 200 (application/json)
