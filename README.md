@@ -309,6 +309,70 @@ Os pedidos podem ser clientes, categoria, produtos, estados.
              "path": "/estados/1"
           }
 
+### Produtos (List) [GET /produtos]
+
++ Request (application/json)
+
+    + Headers
+
+            Content-Type:  [application/json]
+            Authorization: Bearer [access_token]
+
+
++ Response 200 (application/json)
+
+               {
+                 "id": 1,
+                 "nome": "Computador",
+                 "preco": 2000.0
+                },
+                {
+                 "id": 2,
+                 "nome": "Impressora",
+                 "preco": 800.0
+                },
+                "id": 3,
+                 "nome": "Mouse",
+                 "preco": 80.0
+                },
+                "id": 4,
+                 "nome": "Mesa de escritório",
+                 "preco": 300.0
+                },
+                "id": 5,
+                 "nome": "Toalha",
+                 "preco": 50.0
+                },
+                "id": 6,
+                 "nome": "Colcha",
+                 "preco": 200.0
+                },
+                "id": 7,
+                 "nome": "TV true color",
+                 "preco": 1200.0
+                },
+                "id": 8,
+                 "nome": "Roçadeira",
+                 "preco": 800.0
+                },
+                "id": 9,
+                 "nome": "Abajour",
+                 "preco": 100.0
+                },
+               
+            }
+            
++ Response 403 (application/json)
+
+          {
+                "timestamp": 1670373911424,
+                "status": 404,
+                "error": "Não encontrado",
+                "message": "Objeto não encontrado! Id: 60, Tipo: com.br.projeto.springbootmc.domain.Produto",
+                "path": "/produtos/60"
+          }
+
+
 ### Novo Clientes (Create) [POST]
 
 
